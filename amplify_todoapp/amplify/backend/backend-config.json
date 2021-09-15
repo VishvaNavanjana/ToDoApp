@@ -1,9 +1,35 @@
 {
   "auth": {
-    "todoappamplifytodoapc776494d": {
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "todoappamplifytodoapaec2f05eaec2f05e",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ]
+        }
+      ]
+    },
+    "todoappamplifytodoapaec2f05eaec2f05e": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "todoappamplifytodoapaec2f05eaec2f05ePostConfirmation",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ],
       "customAuth": false,
       "frontendAuthConfig": {
         "loginMechanism": [
@@ -16,11 +42,56 @@
           "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": []
         },
-        "mfaConfiguration": "OFF",
+        "mfaConfiguration": "ON",
         "mfaTypes": [
-          "SMS"
+          "TOTP"
         ]
       }
+    }
+  },
+  "function": {
+    "todoappamplifytodoapaec2f05eaec2f05ePostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "AdminQueriese1d39f3b": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true,
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "todoappamplifytodoapaec2f05eaec2f05e",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+    }
+  },
+  "api": {
+    "AdminQueries": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "authorizationType": "AMAZON_COGNITO_USER_POOLS",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "todoappamplifytodoapaec2f05eaec2f05e",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "AdminQueriese1d39f3b",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ]
     }
   }
 }

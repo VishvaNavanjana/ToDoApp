@@ -12,8 +12,19 @@
       "AmplifyAppId": "d3swtsp1uuzyar"
     },
     "categories": {
+      "function": {
+        "todoappamplifytodoapaec2f05eaec2f05ePostConfirmation": {
+          "GROUP": "Users",
+          "deploymentBucketName": "amplify-amplifye49b76ac067f4-staging-84616-deployment",
+          "s3Key": "amplify-builds/todoappamplifytodoapaec2f05eaec2f05ePostConfirmation-42423175493042316837-build.zip"
+        },
+        "AdminQueriese1d39f3b": {
+          "deploymentBucketName": "amplify-amplifye49b76ac067f4-staging-84616-deployment",
+          "s3Key": "amplify-builds/AdminQueriese1d39f3b-735163344a4b73624456-build.zip"
+        }
+      },
       "auth": {
-        "todoappamplifytodoapc776494d": {}
+        "todoappamplifytodoapaec2f05eaec2f05e": {}
       }
     }
   }
